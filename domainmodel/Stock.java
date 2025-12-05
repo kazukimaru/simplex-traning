@@ -1,8 +1,10 @@
+package domainmodel;
+
 public class Stock {
-    private String ticker;
-    private String name;
-    private Market market;
-    private long sharesIssued;
+    private final String ticker;
+    private final String name;
+    private final Market market;
+    private final long sharesIssued;
 
     public Stock(String[] data) {
         this.ticker = data[0];
@@ -12,7 +14,7 @@ public class Stock {
     }
 
     public String getTicker() { return ticker; }
-    public String getName() {
+    public String getProductName() {
         if (name.length() >= 28){
             return name.substring(0,28) + "...";
         }

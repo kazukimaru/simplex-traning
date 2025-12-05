@@ -1,3 +1,5 @@
+package domainmodel;
+
 public enum Market {
     P("Prime"),
     S("Standard"),
@@ -13,4 +15,3 @@ public enum Market {
         return label;
     }
 }
-

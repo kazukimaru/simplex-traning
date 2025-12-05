@@ -1,15 +1,20 @@
+package readcsv;
+
+import domainmodel.Trade;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadTradeCsv {
     public static List<Trade> read(){
         List<Trade> trades = new ArrayList<>();
-        Path tradePath = Path.of("trades.csv");
+        Path tradePath = Path.of("csv/trades.csv");
         String header = "tradedDatetime,ticker,side,quantity,tradedUnitPrice,inputDatetime";
         boolean isheader = true;
         try {
@@ -28,14 +33,14 @@ public class ReadTradeCsv {
                     System.out.println("列数が異なります: " );
                     return new ArrayList<>();
                 }
-
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
                 //型変形させる
-                LocalDateTime tradedDatetime = LocalDateTime.parse(data[0]);
+                LocalDateTime tradedDatetime = LocalDateTime.parse(data[0],formatter);
                 String ticker = data[1];
                 String side = data[2];
                 int quantity = Integer.parseInt(data[3]);
                 BigDecimal tradedUnitPrice = new BigDecimal(data[4]);
-                LocalDateTime inputDatetime = LocalDateTime.parse(data[5]);
+                LocalDateTime inputDatetime = LocalDateTime.parse(data[5],formatter);
 
                 //tradesリストに追加
                 trades.add(new Trade(tradedDatetime,ticker,side,quantity,tradedUnitPrice,inputDatetime));
